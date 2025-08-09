@@ -62,13 +62,13 @@
             position: absolute;
             opacity: 0;
             visibility: hidden;
-            width: 300px;
+            width: 240px;
             
             /* Posicionamento corrigido */
-            top: 60%;
-            left: 85%; /* Começa no final do container do mapa */
-            transform: translateY(-50%); /* Centraliza apenas verticalmente */
-            margin-left: 20px; /* Adiciona um espaço entre o mapa e a caixa */
+            top: 80%;
+            nav-down: 60%; /* Começa no final do container do mapa */
+            transform: translateY(-30%); /* Centraliza apenas verticalmente */
+
             
             /* Estilos visuais */
             padding: 10px;
@@ -577,38 +577,51 @@
 
         <!-- Action Section -->
         <section class="py-16 md:py-24 bg-[#e9d5ff]">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-[#4a248f] mb-6">
-                    Agir antes que aconteça é a nossa melhor resposta.
-                </h2>
-                <p class="text-lg md:text-xl text-[#6b4c9e] mb-10 max-w-3xl mx-auto">
-                    Conheça os caminhos para se proteger e ajudar quem precisa. O silêncio é a maior arma da violência.
-                </p>
-                <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8">
-                    <!-- CTA 1 -->
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/100x100/e9d5ff/8a2be2?text=Saber" alt="Ícone de livro" class="mb-4 rounded-full">
-                        <h3 class="text-xl font-semibold text-[#4a248f] mb-2">O que é o feminicídio?</h3>
-                        <p class="text-gray-600 mb-4">Entenda a definição, as leis e o ciclo da violência.</p>
-                        <a href="leis.html" class="text-[#8a2be2] font-semibold hover:underline">Aprenda mais &rarr;</a>
-                    </div>
-                    <!-- CTA 2 -->
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/100x100/e9d5ff/8a2be2?text=Ajudar" alt="Ícone de mão" class="mb-4 rounded-full">
-                        <h3 class="text-xl font-semibold text-[#4a248f] mb-2">Como buscar ajuda?</h3>
-                        <p class="text-gray-600 mb-4">Canais de denúncia, redes de apoio e abrigos seguros.</p>
-                        <a href="ajuda.html" class="text-[#8a2be2] font-semibold hover:underline">Encontre ajuda &rarr;</a>
-                    </div>
-                    <!-- CTA 3 -->
-                    <div class="flex flex-col items-center">
-                        <img src="https://placehold.co/100x100/e9d5ff/8a2be2?text=Legislação" alt="Ícone de balança" class="mb-4 rounded-full">
-                        <h3 class="text-xl font-semibold text-[#4a248f] mb-2">Conheça as leis</h3>
-                        <p class="text-gray-600 mb-4">Direitos da mulher e a Lei Maria da Penha. Conhecimento é poder.</p>
-                        <a href="leis.html" class="text-[#8a2be2] font-semibold hover:underline">Veja as leis &rarr;</a>
-                    </div>
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#4a248f] mb-6">
+            Agir antes que aconteça é a nossa melhor resposta.
+        </h2>
+        <p class="text-lg md:text-xl text-[#6b4c9e] mb-10 max-w-3xl mx-auto">
+            Conheça os caminhos para se proteger e ajudar quem precisa. O silêncio é a maior arma da violência.
+        </p>
+        <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-8">
+            
+            <div class="flex flex-col items-center">
+                <div class="p-5 bg-[#8a2be2] rounded-full mb-4 inline-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-12 h-12">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                    </svg>
                 </div>
+                <h3 class="text-xl font-semibold text-[#4a248f] mb-2">O que é o feminicídio?</h3>
+                <p class="text-gray-600 mb-4 max-w-xs">Entenda a definição, as leis e o ciclo da violência.</p>
+                <a href="leis.html" class="text-[#8a2be2] font-semibold hover:underline">Aprenda mais &rarr;</a>
             </div>
-        </section>
+
+            <div class="flex flex-col items-center">
+                <div class="p-5 bg-[#8a2be2] rounded-full mb-4 inline-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-12 h-12">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-[#4a248f] mb-2">Como buscar ajuda?</h3>
+                <p class="text-gray-600 mb-4 max-w-xs">Canais de denúncia, redes de apoio e abrigos seguros.</p>
+                <a href="ajuda.html" class="text-[#8a2be2] font-semibold hover:underline">Encontre ajuda &rarr;</a>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="p-5 bg-[#8a2be2] rounded-full mb-4 inline-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-12 h-12">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52v2.625m-13.5-2.625v2.625m13.5-2.625c-1.01.143-2.01.317-3 .52M6.75 4.97v2.625m7.5-3.125c-1.01.143-2.01.317-3 .52m3-.52c1.01.143 2.01.317 3 .52M3 7.5h18M3 7.5c-1.01.143-2.01.317-3 .52m18 0c1.01.143 2.01.317 3 .52M3 7.5v2.625m18-2.625v2.625m-18 0c-1.01.143-2.01.317-3 .52m18 0c1.01.143 2.01.317 3 .52m-18 0v2.625m18-2.625v2.625" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-[#4a248f] mb-2">Conheça as leis</h3>
+                <p class="text-gray-600 mb-4 max-w-xs">Direitos da mulher e a Lei Maria da Penha. Conhecimento é poder.</p>
+                <a href="leis.html" class="text-[#8a2be2] font-semibold hover:underline">Veja as leis &rarr;</a>
+            </div>
+            
+        </div>
+    </div>
+</section>
 
     </main>
     <!-- Footer -->
