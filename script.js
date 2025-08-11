@@ -10,7 +10,6 @@
   });
 })();
 
-// ====== MAPA (opcional): funciona se o SVG e os boxes existirem ======
 (function mapaEstados(){
   var map = document.getElementById('map');
   var select = document.getElementById('seletory');
