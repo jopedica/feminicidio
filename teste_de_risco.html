@@ -4,106 +4,116 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teste de Risco - Vozes Femininas</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <style>
-    body{font-family:'Inter',sans-serif;background:#f7f7f7;color:#333}
-    .badge{display:inline-flex;align-items:center;gap:.5rem}
-    .kbd{font-variant-numeric:tabular-nums}
-  </style>
 </head>
-<body class="antialiased">
+<body>
   <!-- Header -->
-  <header class="bg-white shadow-sm p-4 md:p-6">
-    <div class="container mx-auto flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold text-[#8a2be2] flex items-center gap-2">
-        <img src="https://placehold.co/200x50/8a2be2/ffffff?text=Vozes+Femininas" alt="Logo do projeto" class="h-10" />
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="logo" aria-label="Página inicial Vozes Femininas">
+        <img src="https://placehold.co/200x50/8a2be2/ffffff?text=Vozes+Femininas" alt="Logo do projeto Vozes Femininas">
       </a>
-      <nav class="hidden md:flex space-x-6">
-        <a href="index.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Home</a>
-        <a href="o_que_e.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">O que é?</a>
-        <a href="ajuda.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Ajuda</a>
-        <a href="leis.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Leis</a>
-        <a href="teste_de_risco.html" class="text-[#8a2be2] font-semibold transition-colors">Teste de Risco</a>
-        <a href="contato.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Contato</a>
+      <nav class="main-nav" aria-label="Principal">
+        <a href="index.html">Home</a>
+        <a href="o_que_e.html">O que é?</a>
+        <a href="ajuda.html">Ajuda</a>
+        <a href="leis.html">Leis</a>
+        <a href="teste_de_risco.html" class="active">Teste de Risco</a>
+        <a href="contato.html">Contato</a>
       </nav>
-      <button class="md:hidden text-gray-600 focus:outline-none" aria-label="Abrir menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
     </div>
   </header>
 
   <main>
-    <section id="teste-risco" class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#4a248f] text-center mb-2">Teste de Avaliação de Risco</h2>
-        <p class="text-center text-lg text-gray-700 max-w-3xl mx-auto">Responda às perguntas abaixo para avaliar o risco de violência em seu relacionamento. Este teste é anônimo.</p>
+    <section class="risk-page">
+      <div class="container container-narrow">
 
-        <!-- Chips de ajuda -->
-        <div class="flex flex-wrap gap-3 justify-center mt-6">
-          <span class="badge text-sm px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Escala normalizada para <strong>máximo 34 pontos</strong></span>
-          <button id="btnPesos" type="button" class="badge text-sm px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100">Ver pesos por pergunta</button>
+        <h1 class="risk-title">Teste de Avaliação de Risco</h1>
+        <p class="risk-intro">
+          Responda às perguntas abaixo para avaliar o risco de violência em seu relacionamento. O teste é anônimo.
+        </p>
+
+        <!-- chips/ajuda -->
+        <div class="risk-chips">
+          <span class="chip">Escala normalizada para <strong>máximo 34 pontos</strong></span>
+          <button id="btnPesos" type="button" class="chip chip--btn">Ver pesos por pergunta</button>
         </div>
 
-        <div class="bg-[#f3e8ff] p-6 md:p-8 rounded-lg shadow-lg max-w-4xl mx-auto mt-8">
-          <form id="riskAssessmentForm" class="space-y-6">
+        <!-- Card do formulário -->
+        <div class="card card--lilac">
+          <form id="riskAssessmentForm" class="risk-form">
+
+            <!-- Template de pergunta -->
             <template id="tplPergunta">
-              <div class="item">
-                <p class="pergunta font-semibold text-lg text-gray-800 mb-2"></p>
-                <div class="flex flex-wrap gap-6">
-                  <label class="inline-flex items-center"><input type="radio" class="form-radio text-[#8a2be2]" value="sim"/><span class="ml-2 text-gray-700">Sim</span></label>
-                  <label class="inline-flex items-center"><input type="radio" class="form-radio text-[#8a2be2]" value="nao"/><span class="ml-2 text-gray-700">Não</span></label>
+              <div class="qa-item">
+                <p class="qa-question"></p>
+                <div class="qa-options">
+                  <label class="radio">
+                    <input type="radio" value="sim">
+                    <span>Sim</span>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" value="nao">
+                    <span>Não</span>
+                  </label>
                 </div>
               </div>
             </template>
 
-            <div id="listaPerguntas" class="space-y-6"></div>
+            <!-- Perguntas irão aqui -->
+            <div id="listaPerguntas" class="qa-list"></div>
 
-            <!-- 3A -->
-            <div class="bg-white/60 p-4 rounded-md">
-              <p class="font-semibold text-lg text-gray-800 mb-2">3A. (Caso NUNCA tenham morado juntos, marque aqui)</p>
-              <label class="inline-flex items-center gap-2">
-                <input type="checkbox" id="q3a" class="form-checkbox h-5 w-5 text-[#8a2be2]" />
-                <span class="text-gray-700">Marcar esta opção</span>
+            <!-- 3A: regra especial -->
+            <div class="qa-item qa-special">
+              <label class="checkbox">
+                <input type="checkbox" id="q3a">
+                <span><strong>3A.</strong> Alternativa incompatível com a pergunta 3. Marcar esta opção <strong>desativa</strong> a Q3 e aplica <strong>-3 pontos</strong>.</span>
               </label>
-              <p class="text-xs text-gray-600 mt-2">Obs.: marcar 3A desativa a pergunta 3 (lógica excludente) e aplica <span class="font-semibold">-3 pontos</span>.</p>
+              <p class="hint">Obs.: ao marcar 3A, a pergunta 3 é desabilitada automaticamente.</p>
             </div>
 
-            <div class="text-center pt-2">
-              <button type="submit" class="bg-[#4a248f] text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-[#321a64] transition-colors">Ver Resultado</button>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Ver Resultado</button>
             </div>
           </form>
 
           <!-- Resultado -->
-          <div id="resultArea" class="hidden mt-10 text-center">
-            <h3 id="resultTitle" class="text-3xl font-bold"></h3>
-            <p class="mt-2 text-xl font-semibold">Sua pontuação: <span id="scoreValue" class="kbd"></span> / 34 <span id="scorePct" class="text-sm text-gray-600"></span></p>
-            <p id="resultText" class="mt-4 text-lg bg-white/60 p-6 rounded-lg"></p>
+          <div id="resultArea" class="risk-result" hidden>
+            <h3 id="resultTitle" class="risk-result__title"></h3>
+            <p class="risk-result__score">
+              Sua pontuação: <span id="scoreValue" class="kbd"></span> / 34
+              <span id="scorePct" class="risk-result__pct"></span>
+            </p>
+            <p id="resultText" class="risk-result__text"></p>
 
-            <div class="mt-6 text-left bg-white rounded-lg p-4 border border-purple-100" id="debugBox" hidden>
-              <p class="font-semibold mb-2">Como calculamos:</p>
-              <pre class="text-sm whitespace-pre-wrap" id="debugText"></pre>
+            <div class="risk-debug" id="debugBox" hidden>
+              <p class="risk-debug__title">Como calculamos:</p>
+              <pre id="debugText"></pre>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   </main>
 
-  <footer class="bg-[#4a248f] text-white py-8">
-    <div class="container mx-auto px-4 text-center">
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
       <p>&copy; 2024 Vozes Femininas. Todos os direitos reservados.</p>
-      <div class="flex justify-center space-x-4 mt-4">
-        <a href="#" class="text-white/90 hover:text-white">Facebook</a>
-        <a href="#" class="text-white/90 hover:text-white">Instagram</a>
-        <a href="#" class="text-white/90 hover:text-white">X (Twitter)</a>
+      <div class="flex flex-center">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">X (Twitter)</a>
       </div>
     </div>
   </footer>
 
+  <!-- Script da página -->
   <script>
-  // --- Perguntas 1..20 (sem 3A aqui) ---
+  // --- Perguntas 1..20 (Q3A é separada) ---
   const perguntas = [
     '1. A violência física aumentou em gravidade ou frequência no último ano?',
     '2. Ele possui arma de fogo?',
@@ -127,109 +137,97 @@
     '20. Você já ameaçou ou tentou cometer suicídio?'
   ];
 
-  // Pesos EXTRAS validados neste projeto (soma máx total = 34)
-  // Base: cada "Sim" (Q1..Q20) = 1 ponto
-  // Extras: Q2 +4, Q3 +4, Q4 +3, Q5 +2, Q6 +2, Q7 +2, Q8 +1, Q9 +1
-  // Regra especial: 3A (checkbox) = -3 e desabilita Q3
+  // Pesos extras (teto da escala = 34)
   const pesosExtras = { q2:4, q3:4, q4:3, q5:2, q6:2, q7:2, q8:1, q9:1 };
-  const MAXIMO = 34; // normalizado
+  const MAXIMO = 34;
 
-  // Renderiza perguntas
-  const cont = document.getElementById('listaPerguntas');
-  const tpl = document.getElementById('tplPergunta');
-  perguntas.forEach((texto,i)=>{
-    const n = i+1;
-    const clone = tpl.content.cloneNode(true);
-    const root = clone.querySelector('.item');
-    const p = clone.querySelector('.pergunta');
-    p.textContent = texto;
-    const radios = clone.querySelectorAll('input[type="radio"]');
-    radios.forEach(r=>{ r.setAttribute('name','q'+n); });
-    cont.appendChild(clone);
-  });
+  // Renderização das perguntas
+  (function renderPerguntas(){
+    const cont = document.getElementById('listaPerguntas');
+    const tpl  = document.getElementById('tplPergunta');
+    perguntas.forEach((texto, i) => {
+      const n = i + 1;
+      const frag = tpl.content.cloneNode(true);
+      frag.querySelector('.qa-question').textContent = texto;
 
-  // 3A desativa Q3
+      const radios = frag.querySelectorAll('input[type="radio"]');
+      radios.forEach(r => r.name = 'q' + n);
+
+      cont.appendChild(frag);
+    });
+  })();
+
+  // Regra 3A: desabilitar Q3 quando marcada
   const q3a = document.getElementById('q3a');
-  q3a.addEventListener('change',()=>{
+  q3a.addEventListener('change', () => {
     const radiosQ3 = document.querySelectorAll('input[name="q3"]');
-    if(q3a.checked){
-      radiosQ3.forEach(r=>{ r.checked=false; r.disabled=true; });
+    if (q3a.checked) {
+      radiosQ3.forEach(r => { r.checked = false; r.disabled = true; });
     } else {
-      radiosQ3.forEach(r=>{ r.disabled=false; });
+      radiosQ3.forEach(r => { r.disabled = false; });
     }
   });
 
-  // Modal/tooltip simples dos pesos
-  document.getElementById('btnPesos').addEventListener('click',()=>{
-    const linhas = [
+  // Tooltip simples de pesos
+  document.getElementById('btnPesos').addEventListener('click', () => {
+    alert([
       'Peso base: cada "Sim" nas Q1..Q20 = 1 ponto (3A não pontua).',
       'Pesos extras: Q2(+4), Q3(+4), Q4(+3), Q5(+2), Q6(+2), Q7(+2), Q8(+1), Q9(+1).',
       'Regra especial: marcar 3A aplica -3 (e torna Q3 incompatível).',
       'Máximo da escala: 34.'
-    ];
-    alert(linhas.join('\n'));
+    ].join('\n'));
   });
 
-  // Cálculo
+  // Cálculo do resultado
   $('#riskAssessmentForm').on('submit', function(e){
     e.preventDefault();
 
-    let scoreBase = 0;    // soma de 1 ponto por "Sim"
-    let scoreExtras = 0;  // pesos extras
-    let debug = [];
-
-    for(let i=1;i<=20;i++){
-      const name = 'q'+i;
+    let base = 0, extras = 0;
+    for (let i = 1; i <= 20; i++) {
+      const name = 'q' + i;
       const yes = $(`input[name="${name}"][value="sim"]`).is(':checked');
-      if(yes){
-        scoreBase += 1; // ponto base
-        if(pesosExtras[name]) scoreExtras += pesosExtras[name];
+      if (yes) {
+        base += 1;
+        if (pesosExtras[name]) extras += pesosExtras[name];
       }
     }
 
-    // 3A: -3 e desabilita Q3 (já tratado no UI)
-    if(q3a.checked){ scoreExtras -= 3; debug.push('3A marcado: -3'); }
+    if (q3a.checked) extras -= 3;
 
-    let score = scoreBase + scoreExtras;
+    let score = base + extras;
+    if (score > MAXIMO) score = MAXIMO;
 
-    // Normalização: garantir teto de 34 para manter a mesma escala utilizada no projeto/planilha
-    if(score > MAXIMO){ score = MAXIMO; debug.push(`Ajuste de teto aplicado: ${MAXIMO}`); }
-
-    // Render resultado
-    const resultArea = $('#resultArea');
-    const resultTitle = $('#resultTitle');
-    const resultText = $('#resultText');
     const pct = Math.round((score / MAXIMO) * 100);
 
+    // Render
     $('#scoreValue').text(score);
     $('#scorePct').text(`(${pct}%)`);
 
-    // reset classes
-    resultTitle.removeClass('text-green-600 text-yellow-600 text-orange-600 text-red-600');
+    const $title = $('#resultTitle').removeClass('risk--var risk--up risk--grave risk--ext');
+    const $text  = $('#resultText');
 
-    if(score <= 7){
-      resultTitle.text('Risco Variável').addClass('text-green-600');
-      resultText.html('Seu resultado indica <strong>risco variável</strong>. Permaneça vigilante e procure informações sobre seus direitos.');
-    } else if(score <= 13){
-      resultTitle.text('Risco Aumentado').addClass('text-yellow-600');
-      resultText.html('Há <strong>risco aumentado</strong>. Considere buscar apoio e orientação pelo <strong>180</strong>.');
-    } else if(score <= 17){
-      resultTitle.text('Risco Grave').addClass('text-orange-600');
-      resultText.html('<strong>Atenção!</strong> Indícios de <strong>risco grave</strong>. Procure ajuda especializada. Ligue <strong>180</strong> ou procure uma DEAM.');
+    if (score <= 7) {
+      $title.text('Risco Variável').addClass('risk--var');
+      $text.html('Seu resultado indica <strong>risco variável</strong>. Permaneça vigilante e procure informações sobre seus direitos.');
+    } else if (score <= 13) {
+      $title.text('Risco Aumentado').addClass('risk--up');
+      $text.html('Há <strong>risco aumentado</strong>. Considere buscar apoio e orientação pelo <strong>180</strong>.');
+    } else if (score <= 17) {
+      $title.text('Risco Grave').addClass('risk--grave');
+      $text.html('<strong>Atenção!</strong> Indícios de <strong>risco grave</strong>. Procure ajuda especializada. Ligue <strong>180</strong> ou procure uma DEAM.');
     } else {
-      resultTitle.text('Risco Extremo').addClass('text-red-600');
-      resultText.html('<strong>PERIGO!</strong> Indícios de <strong>risco extremo</strong>. Em emergência, ligue <strong>190</strong>; para orientação, <strong>180</strong>.');
+      $title.text('Risco Extremo').addClass('risk--ext');
+      $text.html('<strong>PERIGO!</strong> Indícios de <strong>risco extremo</strong>. Em emergência, ligue <strong>190</strong>; para orientação, <strong>180</strong>.');
     }
 
-    // Caixa debug opcional
-    const dbg = document.getElementById('debugBox');
-    const dbgText = document.getElementById('debugText');
-    dbg.hidden = false;
-    dbgText.textContent = `Base = ${scoreBase}\nExtras = ${scoreExtras}\nTotal (ajustado ao teto 34) = ${score}`;
+    $('#debugBox').prop('hidden', false);
+    $('#debugText').text(`Base = ${base}\nExtras = ${extras}\nTotal (ajustado ao teto 34) = ${score}`);
 
-    resultArea.removeClass('hidden');
-    window.scrollTo({top: resultArea[0].offsetTop - 100, behavior:'smooth'});
+    $('#resultArea').prop('hidden', false);
+    window.scrollTo({ top: document.getElementById('resultArea').offsetTop - 100, behavior: 'smooth' });
   });
   </script>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,234 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fim da Violência Contra a Mulher - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f7f7;
-            color: #333;
-        }
-        
-        /* --- ESTRUTURA E ESTILOS DO MAPA --- */
-        .box-mapa {
-            position: relative; /* Essencial para o posicionamento absoluto da caixa de info */
-            z-index: 1;
-        }
-        
-        #map {
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* --- Estilos dos estados no SVG --- */
-        #map .state {
-            cursor: pointer;
-        }
-        #map .state .shape {
-            fill: #ddd;
-            transition: all .3s ease-in-out;
-        }
-        #map .state:hover .shape,
-        #map .state.active .shape { /* Adiciona estilo para estado ativo */
-            fill: #8a2be2 !important;
-        }
-        #map .state .label_icon_state {
-            fill: #666; /* Cor padrão do texto do estado */
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: normal;
-            pointer-events: none; /* Evita que o texto interfira no clique */
-        }
-        #map .state:hover .label_icon_state,
-        #map .state.active .label_icon_state { /* Cor do texto no estado ativo/hover */
-            fill: #FFF;
-        }
-        #map .state .icon_state {
-            fill: #4a248f;
-        }
-        #map .state:hover .icon_state {
-            fill: #8a2be2;
-        }
-
-        /* --- CAIXA DE INFORMAÇÕES DO ESTADO (CORRIGIDO) --- */
-        .parca .estado {
-            position: absolute;
-            opacity: 0;
-            visibility: hidden;
-            width: 240px;
-            
-            /* Posicionamento corrigido */
-            top: 80%;;
-            nav-down: 60%; /* Começa no final do container do mapa */
-            transform: translateY(-75%); /* Centraliza apenas verticalmente */
-
-            
-            /* Estilos visuais */
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            background-color: #f3e8ff;
-            color: #333;
-            z-index: 10;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        
-        .parca .estado.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .parca .estado h3 {
-            margin-top: 0;
-            background-color: #4a248f;
-            padding: 10px;
-            text-transform: uppercase;
-            color: #FFF;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-        
-        .parca .estado ul {
-            padding-left: 20px;
-            list-style: disc;
-        }
-        
-        .parca .estado ul li {
-            line-height: 24px;
-        }
-        
-        /* Oculta o seletor em telas grandes */
-        .parca select {
-            display: none;
-        }
-
-        /* --- RESPONSIVIDADE --- */
-        @media(max-width: 1024px) {
-             /* Em telas menores, a caixa de info volta para baixo do mapa */
-            .parca .estado {
-                position: static; /* Remove o posicionamento absoluto */
-                transform: none;
-                margin: 20px auto 0; /* Centraliza e adiciona margem */
-                left: auto;
-                top: auto;
-            }
-        }
-
-        @media(max-width: 500px) {
-
-            .parca select { /* Mostra o seletor <select> */
-                display: none;
-                width: 90%;
-                margin: 20px auto;
-                border: 1px solid #999;
-                height: 40px;
-                padding: 9px;
-            }
-            .parca .estado {
-                 /* Garante que a caixa de info ainda seja visível */
-                display: none;
-            }
-            .parca .estado.active {
-                display: block;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fim da Violência Contra a Mulher - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="antialiased">
-    <!-- Header -->
-    <header class="bg-white shadow-sm p-4 md:p-6">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-[#8a2be2]">
-                <img src="https://placehold.co/200x50/8a2be2/ffffff?text=Vozes+Femininas" alt="Logo do projeto" class="h-10">
-            </a>
-            <nav class="hidden md:flex space-x-6">
-                <a href="index.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Home</a>
-                <a href="o_que_e.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">O que é?</a>
-                <a href="ajuda.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Ajuda</a>
-                <a href="leis.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Leis</a>
-                <a href="teste_de_risco.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Teste de Risco</a>
-                <a href="contato.html" class="text-gray-600 hover:text-[#8a2be2] transition-colors">Contato</a>
-            </nav>
-                <button id="hamburger-button" class="md:hidden text-gray-600 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-</button>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="index.html" class="logo" aria-label="Página inicial Vozes Femininas">
+        <img src="https://placehold.co/200x50/8a2be2/ffffff?text=Vozes+Femininas" alt="Logo do projeto Vozes Femininas" />
+      </a>
+      <nav class="main-nav" aria-label="Principal">
+        <a href="index.html" class="active">Home</a>
+        <a href="o_que_e.html">O que é?</a>
+        <a href="ajuda.html">Ajuda</a>
+        <a href="leis.html">Leis</a>
+        <a href="teste_de_risco.html">Teste de Risco</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container text-center">
+        <h1>Fim da Violência Contra a Mulher</h1>
+        <p class="lead">
+          Um site para informar, conscientizar e proteger. Junte-se a nós na luta por um futuro sem medo.
+        </p>
+        <div class="cta-group">
+          <a class="btn btn-primary" href="o_que_e.html">Saiba o que é</a>
+          <a class="btn btn-outline" href="ajuda.html">Como Ajudar</a>
         </div>
-    </header>
+      </div>
 
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg p-4 space-y-4">
-    <a href="index.html" class="block text-gray-700 hover:text-[#8a2be2]">Home</a>
-    <a href="o_que_e.html" class="block text-gray-700 hover:text-[#8a2be2]">O que é?</a>
-    <a href="ajuda.html" class="block text-gray-700 hover:text-[#8a2be2]">Ajuda</a>
-    <a href="leis.html" class="block text-gray-700 hover:text-[#8a2be2]">Leis</a>
-    <a href="teste_de_risco.html" class="block text-gray-700 hover:text-[#8a2be2]">Teste de Risco</a>
-    <a href="contato.html" class="block text-gray-700 hover:text-[#8a2be2]">Contato</a>
-</div>
+    </section>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="bg-[#e9d5ff] py-16 md:py-24 text-center">
-            <div class="container mx-auto px-4">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-[#4a248f] mb-4 leading-tight">
-                    Fim da Violência Contra a Mulher
-                </h1>
-                <p class="text-lg md:text-xl text-[#6b4c9e] mb-8 max-w-2xl mx-auto">
-                    Um site para informar, conscientizar e proteger. Junte-se a nós na luta por um futuro sem medo.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="o_que_e.html" class="bg-[#8a2be2] text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-[#6b4c9e] transition-colors">
-                        Saiba o que é
-                    </a>
-                    <a href="ajuda.html" class="bg-white text-[#8a2be2] font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-                        Como Ajudar
-                    </a>
-                </div>
-            </div>
-        </section>
+    <section class="stats-mapa">
+  <div class="container">
+    <h2 class="section-title">
+      A Realidade em Números: Em 2024 esses foram os casos de crimes consumados e tentados de feminicídio no Brasil.
+    </h2>
 
-        <!-- Stats Section & Mapa -->
-        <section class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-[#4a248f] mb-12">
-                    A Realidade em Números: Em 2024 esses foram os casos de crimes consumados e tentados de feminicídio no Brasil.
-                </h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <!-- Stats -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Stat 1 -->
-                        <div class="bg-[#f3e8ff] p-8 rounded-lg shadow-md">
-                            <p class="text-5xl font-extrabold text-[#8a2be2] mb-2">4,145</p>
-                            <p class="text-lg text-gray-700">Crimes de feminicídios CONSUMADOS E TENTADOS foram registrados em 2024 no Brasil.</p>
-                            <small class="text-gray-500 block mt-2">(Fonte: Fórum Brasileiro de Segurança Pública)</small>
-                        </div>
-                        <!-- Stat 2 -->
-                        <div class="bg-[#f3e8ff] p-8 rounded-lg shadow-md">
-                            <p class="text-5xl font-extrabold text-[#8a2be2] mb-2">35%</p>
-                            <p class="text-lg text-gray-700">Das mulheres brasileiras já sofreram algum tipo de violência.</p>
-                            <small class="text-gray-500 block mt-2">(Fonte: Datafolha)</small>
-                        </div>
-                        <!-- Stat 3 -->
-                        <div class="bg-[#f3e8ff] p-8 rounded-lg shadow-md">
-                            <p class="text-5xl font-extrabold text-[#8a2be2] mb-2">180</p>
-                            <p class="text-lg text-gray-700">É o número de telefone para denúncias de violência contra a mulher.</p>
-                            <small class="text-gray-500 block mt-2">(Central de Atendimento à Mulher)</small>
-                        </div>
-                    </div>
-                    
-                    <!-- Mapa e Informações (ESTRUTURA CORRIGIDA) -->
-                    <div class="box-mapa">
-                        <svg id="map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="460" height="465" viewBox="0 0 460 465">
-                            <g class="model-davi">
-                                <desc>Brasil</desc>
-                                <a href="#" id="state_ba" class="state" data-state="ba" xlink:href="">
+    <div class="stats-mapa-grid">
+      <!-- Cards de estatísticas -->
+      <div class="stats-grid">
+        <article class="stat-card">
+          <p class="stat-number">4.145</p>
+          <p class="stat-text">
+            Crimes de feminicídios CONSUMADOS E TENTADOS foram registrados em 2024 no Brasil.
+          </p>
+          <small class="stat-source">(Fonte: Fórum Brasileiro de Segurança Pública)</small>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-number">35%</p>
+          <p class="stat-text">
+            Das mulheres brasileiras já sofreram algum tipo de violência.
+          </p>
+          <small class="stat-source">(Fonte: Datafolha)</small>
+        </article>
+
+        <article class="stat-card">
+          <p class="stat-number">180</p>
+          <p class="stat-text">
+            É o número de telefone para denúncias de violência contra a mulher.
+          </p>
+          <small class="stat-source">(Central de Atendimento à Mulher)</small>
+        </article>
+      </div>
+
+   
+  </div>
+</section>
+      <div class="box-mapa">
+        <svg id="map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="460" height="465" viewBox="0 0 460 465" aria-labelledby="titulo-mapa">
+          <title id="titulo-mapa">Mapa do Brasil – selecione um estado</title>
+          <g class="model-davi">
+            <desc>Brasil</desc>
+
+<a href="#" id="state_ba" class="state" data-state="ba" xlink:href="">
                                     <desc id="description_ba">Bahia</desc>
                                     <path id="shape_ba" class="shape" d="m 396.7483,280.14568 c 0.71501,-2.34867 2.32435,-8.20598 2.77544,-10.88304 1.06631,-4.36755 3.22976,-8.56454 2.89307,-13.15018 0.24433,-9.74093 0.23297,-19.53715 1.88542,-29.15165 -1.15228,-2.73068 4.27262,-3.15317 1.98097,-5.4068 -1.73917,-0.58345 0.40641,-3.0821 1.62874,-3.43559 1.53619,-0.44426 2.9396,0.42062 4.0554,2.55291 1.73062,0.80718 2.10721,-1.34658 3.44153,-2.3963 1.76038,-3.59872 4.5629,-7.82465 6.35375,-9.78217 -2.85539,-2.53678 -4.39697,-3.48364 -5.47699,-5.95478 -1.15551,-2.64388 -2.51321,-6.38726 -0.69554,-8.62811 0.8232,-1.01486 3.09325,0.53899 3.88851,-0.49791 1.1238,-1.46527 -0.15589,-3.75867 -0.74511,-5.48947 -1.13553,-3.33554 -2.18056,-8.25892 -3.93647,-11.01495 -1.1871,-1.86324 -2.8669,-3.41295 -4.68577,-4.65245 -1.85469,-1.26391 -3.96204,-2.60677 -6.16293,-2.71187 -2.38216,-0.11376 -4.32187,2.50569 -6.51221,3.70588 -2.22637,1.21993 -3.59855,3.30495 -6.73716,3.55179 -2.5361,0.19943 -4.2372,-1.37704 -4.99484,-3.97769 -1.27754,-2.23433 -2.44172,-3.74646 -4.4687,-3.83434 -1.22531,-0.0531 -2.13234,1.21325 -3.13497,1.91584 -1.84821,1.29512 -3.35747,3.05441 -5.28854,4.22383 -2.25784,1.3673 -4.62557,2.88087 -7.24986,3.19641 -4.15038,0.49906 -7.72576,-3.98224 -11.99836,-2.01778 -1.36462,0.62742 -0.32681,2.83249 -0.58534,4.30555 -0.33094,1.88625 -0.65365,3.87203 -1.6678,5.49956 -1.355,2.17451 -3.19835,4.27941 -5.45026,5.51555 -2.29861,1.26176 -5.1901,2.01727 -7.79672,1.71113 -2.61965,-0.30767 -5.09356,-1.52312 -7.08001,-3.18076 -1.74634,-1.45727 -2.82984,-5.60291 -3.86531,-5.62313 -1.87079,-0.0365 -3.74146,7.10626 -5.89576,11.98985 -0.63247,1.43375 3.11949,4.1232 3.31557,6.66498 0.12788,1.65771 -1.66882,3.00996 -1.75071,4.67058 -0.10329,2.09443 1.48709,2.87468 1.61775,6.07936 0.0931,2.28225 -0.95868,4.37663 -1.04047,6.60343 -0.12668,3.44858 0.0489,6.69098 0.85673,10.31719 0.72509,3.2546 3.17304,5.19269 -0.24445,10.0002 5.13924,1.05891 11.15958,-5.0548 16.30713,-7.39931 2.60854,-0.70728 4.8401,-1.06363 6.82943,0.0373 1.54993,0.85775 1.35847,3.49706 2.83011,4.48183 2.27406,1.5217 5.47244,0.63594 8.09762,1.41941 5.655,1.68766 6.77439,7.11151 16.25437,6.99917 2.75517,-0.0327 3.16261,4.36921 5.5539,5.73076 3.11222,2.36598 11.11558,0.63149 12.80505,4.85243 2.29565,5.73537 -7.71302,12.19482 -7.12466,15.98706 0.43899,2.82945 3.71881,5.52173 6.1833,7.75474 0.97504,0.88346 2.13673,2.26039 3.46556,2.05997 0.51461,-0.0776 0.78079,-0.71097 1.04711,-1.15809 0.26778,-0.44957 0.52248,-1.48034 0.52248,-1.48034 z"></path>
                                     <text id="label_icon_state_ba" class="label_icon_state" x="365" y="216">BA</text>
@@ -369,323 +225,198 @@
                                     <circle id="icon_df" class="icon_state" r="12" cx="301" cy="251"></circle>
                                     <text id="label_icon_state_df" class="label_icon_state" x="294" y="255">DF</text>
                                 </a>
-                            </g>
-                        </svg>
-                        
-                        <!-- Bloco de informações dos estados (MOVIDO PARA CÁ) -->
-                        <div class="parca">
-                            <select name="select" id="seletory" class="p-2 border border-gray-300 rounded-md">
-                                <option value="" disabled selected>Selecione um estado</option>
-                                <option value="mg" data-stado="mg"> Minas Gerais</option>
-                                <option value="ac" data-stado="ac"> Acre</option>
-                                <option value="al" data-stado="al"> Alagoas</option>
-                                <option value="ap" data-stado="ap"> Amapá</option>
-                                <option value="am" data-stado="am"> Amazonas</option>
-                                <option value="ba" data-stado="ba"> Bahia</option>
-                                <option value="ce" data-stado="ce"> Ceará</option>
-                                <option value="df" data-stado="df"> Distrito Federal</option>
-                                <option value="es" data-stado="es"> Espírito Santo</option>
-                                <option value="go" data-stado="go"> Goiás</option>
-                                <option value="ma" data-stado="ma"> Maranhão</option>
-                                <option value="mt" data-stado="mt"> Mato Grosso</option>
-                                <option value="ms" data-stado="ms"> Mato Grosso do Sul</option>
-                                <option value="pa" data-stado="pa"> Pará</option>
-                                <option value="pb" data-stado="pb"> Paraíba</option>
-                                <option value="pr" data-stado="pr"> Paraná</option>
-                                <option value="pe" data-stado="pe"> Pernambuco</option>
-                                <option value="pi" data-stado="pi"> Piauí</option>
-                                <option value="rj" data-stado="rj"> Rio de Janeiro</option>
-                                <option value="rn" data-stado="rn"> Rio Grande do Norte</option>
-                                <option value="rs" data-stado="rs"> Rio Grande do Sul</option>
-                                <option value="ro" data-stado="ro"> Rondônia</option>
-                                <option value="rr" data-stado="rr"> Roraima</option>
-                                <option value="sc" data-stado="sc"> Santa Catarina</option>
-                                <option value="se" data-stado="se"> Sergipe</option>
-                                <option value="sp" data-stado="sp"> São Paulo</option>
-                                <option value="to" data-stado="to"> Tocantins</option>
-                            </select>
-                            <div id="box_mg" data-info="mg" class="estado active">
-                                <h3>Minas Gerais</h3>
-                                <ul>
-                                    <li>Minas Gerais - 366 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_sp" data-info="sp" class="estado">
-                                <h3>São Paulo</h3>
-                                    <ul>
-                                    <li>São Paulo - 540 feminicídios</li>
-                                    </ul>
-                            </div>
-                            <div id="box_rj" data-info="rj" class="estado">
-                                <h3>Rio de Janeiro</h3>
-                                <ul>
-                                    <li>Rio de Janeiro - 232 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_ac" data-info="ac" class="estado">
-                                <h3>Acre</h3>
-                                <ul>
-                                    <li>Acre - 39 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_al" data-info="al" class="estado">
-                                <h3>Alagoas</h3>
-                                <ul>
-                                    <li>Alagoas - 97 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_ap" data-info="ap" class="estado">
-                                <h3>Amapá</h3>
-                                <ul>
-                                    <li>Amapá - 19 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_am" data-info="am" class="estado">
-                                <h3>Amazonas</h3>
-                                <ul>
-                                    <li>Amazonas - 118 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_ba" data-info="ba" class="estado">
-                                <h3>Bahia</h3>
-                                <ul>
-                                    <li>Bahia - 243 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_ce" data-info="ce" class="estado">
-                                <h3>Ceará</h3>
-                                <ul>
-                                    <li>Ceará - 104 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_df" data-info="df" class="estado">
-                                <h3>Distrito Federal</h3>
-                                <ul>
-                                    <li>Distrito Federal - 85 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_es" data-info="es" class="estado">
-                                <h3>Espírito Santo</h3>
-                                <ul>
-                                    <li>Espírito Santo - 108 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_go" data-info="go" class="estado">
-                                <h3>Goiás</h3>
-                                <ul>
-                                    <li>Goiás - 156 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_ma" data-info="ma" class="estado">
-                                <h3>Maranhão</h3>
-                                <ul>
-                                    <li>Maranhão - 90 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_mt" data-info="mt" class="estado">
-                                <h3>Mato Grosso</h3>
-                                <ul>
-                                    <li>Mato Grosso - 220 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_ms" data-info="ms" class="estado">
-                                <h3>Mato Grosso do Sul</h3>
-                                <ul>
-                                    <li>Mato Grosso do Sul - 181 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_pa" data-info="pa" class="estado">
-                                <h3>Pará</h3>
-                                <ul>
-                                    <li>Pará - 138 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_pb" data-info="pb" class="estado">
-                                <h3>Paraíba</h3>
-                                <ul>
-                                    <li>Paraíba - 90 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_pr" data-info="pr" class="estado">
-                                <h3>Paraná</h3>
-                                <ul>
-                                    <li>Paraná - 346 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_pe" data-info="pe" class="estado">
-                                <h3>Pernambuco</h3>
-                                <ul>
-                                    <li>Pernambuco - 146 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_pi" data-info="pi" class="estado">
-                                <h3>Piauí</h3>
-                                <ul>
-                                    <li>Piauí - 98 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_rn" data-info="rn" class="estado">
-                                <h3>Rio Grande do Norte</h3>
-                                <ul>
-                                    <li>Rio Grande do Norte - 45 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_rs" data-info="rs" class="estado">
-                                <h3>Rio Grande do Sul</h3>
-                                <ul>
-                                    <li>Rio Grande do Sul - 189 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_ro" data-info="ro" class="estado">
-                                <h3>Rondônia</h3>
-                                <ul>
-                                    <li>Rondônia - 98 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_rr" data-info="rr" class="estado">
-                                <h3>Roraima</h3>
-                                <ul>
-                                    <li>Roraima - 25 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_sc" data-info="sc" class="estado">
-                                <h3>Santa Catarina</h3>
-                                <ul>
-                                    <li>Santa Catarina - 249 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_se" data-info="se" class="estado">
-                                <h3>Sergipe</h3>
-                                <ul>
-                                    <li>Sergipe - 32 feminicídios</li>
-                                </ul>
-                            </div>
-                            <div id="box_to" data-info="to" class="estado">
-                                <h3>Tocantins</h3>
-                                <ul>
-                                    <li>Tocantins - 51 feminicídios</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+          </g>
+        </svg>
 
-        <!-- Action Section -->
-        <section class="py-16 md:py-24 bg-[#e9d5ff]">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#4a248f] mb-6">
-            Agir antes que aconteça é a nossa melhor resposta.
-        </h2>
-        <p class="text-lg md:text-xl text-[#6b4c9e] mb-10 max-w-3xl mx-auto">
-            Conheça os caminhos para se proteger e ajudar quem precisa. O silêncio é a maior arma da violência.
-        </p>
-        <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-8">
-            
-            <div class="flex flex-col items-center">
-                <div class="p-5 bg-[#8a2be2] rounded-full mb-4 inline-flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-12 h-12">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-[#4a248f] mb-2">O que é o feminicídio?</h3>
-                <p class="text-gray-600 mb-4 max-w-xs">Entenda a definição, as leis e o ciclo da violência.</p>
-                <a href="leis.html" class="text-[#8a2be2] font-semibold hover:underline">Aprenda mais &rarr;</a>
-            </div>
+        <!-- ====== Informações por estado ====== -->
+        <div class="parca">
+          <select name="select" id="seletory" class="select-estado">
+            <option value="" disabled selected>Selecione um estado</option>
+            <option value="mg">Minas Gerais</option>
+            <option value="ac">Acre</option>
+            <option value="al">Alagoas</option>
+            <option value="ap">Amapá</option>
+            <option value="am">Amazonas</option>
+            <option value="ba">Bahia</option>
+            <option value="ce">Ceará</option>
+            <option value="df">Distrito Federal</option>
+            <option value="es">Espírito Santo</option>
+            <option value="go">Goiás</option>
+            <option value="ma">Maranhão</option>
+            <option value="mt">Mato Grosso</option>
+            <option value="ms">Mato Grosso do Sul</option>
+            <option value="pa">Pará</option>
+            <option value="pb">Paraíba</option>
+            <option value="pr">Paraná</option>
+            <option value="pe">Pernambuco</option>
+            <option value="pi">Piauí</option>
+            <option value="rj">Rio de Janeiro</option>
+            <option value="rn">Rio Grande do Norte</option>
+            <option value="rs">Rio Grande do Sul</option>
+            <option value="ro">Rondônia</option>
+            <option value="rr">Roraima</option>
+            <option value="sc">Santa Catarina</option>
+            <option value="se">Sergipe</option>
+            <option value="sp">São Paulo</option>
+            <option value="to">Tocantins</option>
+          </select>
 
-            <div class="flex flex-col items-center">
-                <div class="p-5 bg-[#8a2be2] rounded-full mb-4 inline-flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-12 h-12">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-[#4a248f] mb-2">Como buscar ajuda?</h3>
-                <p class="text-gray-600 mb-4 max-w-xs">Canais de denúncia, redes de apoio e abrigos seguros.</p>
-                <a href="ajuda.html" class="text-[#8a2be2] font-semibold hover:underline">Encontre ajuda &rarr;</a>
-            </div>
-
-            <div class="flex flex-col items-center">
-                <div class="p-5 bg-[#8a2be2] rounded-full mb-4 inline-flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-12 h-12">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52v2.625m-13.5-2.625v2.625m13.5-2.625c-1.01.143-2.01.317-3 .52M6.75 4.97v2.625m7.5-3.125c-1.01.143-2.01.317-3 .52m3-.52c1.01.143 2.01.317 3 .52M3 7.5h18M3 7.5c-1.01.143-2.01.317-3 .52m18 0c1.01.143 2.01.317 3 .52M3 7.5v2.625m18-2.625v2.625m-18 0c-1.01.143-2.01.317-3 .52m18 0c1.01.143 2.01.317 3 .52m-18 0v2.625m18-2.625v2.625" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-[#4a248f] mb-2">Conheça as leis</h3>
-                <p class="text-gray-600 mb-4 max-w-xs">Direitos da mulher e a Lei Maria da Penha. Conhecimento é poder.</p>
-                <a href="leis.html" class="text-[#8a2be2] font-semibold hover:underline">Veja as leis &rarr;</a>
-            </div>
-            
+          <!-- Boxes (mostra/oculta via .active) -->
+          <div id="box_mg" data-info="mg" class="estado active">
+            <h3>Minas Gerais</h3>
+            <ul><li>Minas Gerais - 366 feminicídios</li></ul>
+          </div>
+          <div id="box_sp" data-info="sp" class="estado">
+            <h3>São Paulo</h3>
+            <ul><li>São Paulo - 540 feminicídios</li></ul>
+          </div>
+          <div id="box_rj" data-info="rj" class="estado">
+            <h3>Rio de Janeiro</h3>
+            <ul><li>Rio de Janeiro - 232 feminicídios</li></ul>
+          </div>
+          <div id="box_ac" data-info="ac" class="estado">
+            <h3>Acre</h3>
+            <ul><li>Acre - 39 feminicídios</li></ul>
+          </div>
+          <div id="box_al" data-info="al" class="estado">
+            <h3>Alagoas</h3>
+            <ul><li>Alagoas - 97 feminicídios</li></ul>
+          </div>
+          <div id="box_ap" data-info="ap" class="estado">
+            <h3>Amapá</h3>
+            <ul><li>Amapá - 19 feminicídios</li></ul>
+          </div>
+          <div id="box_am" data-info="am" class="estado">
+            <h3>Amazonas</h3>
+            <ul><li>Amazonas - 118 feminicídios</li></ul>
+          </div>
+          <div id="box_ba" data-info="ba" class="estado">
+            <h3>Bahia</h3>
+            <ul><li>Bahia - 243 feminicídios</li></ul>
+          </div>
+          <div id="box_ce" data-info="ce" class="estado">
+            <h3>Ceará</h3>
+            <ul><li>Ceará - 104 feminicídios</li></ul>
+          </div>
+          <div id="box_df" data-info="df" class="estado">
+            <h3>Distrito Federal</h3>
+            <ul><li>Distrito Federal - 85 feminicídios</li></ul>
+          </div>
+          <div id="box_es" data-info="es" class="estado">
+            <h3>Espírito Santo</h3>
+            <ul><li>Espírito Santo - 108 feminicídios</li></ul>
+          </div>
+          <div id="box_go" data-info="go" class="estado">
+            <h3>Goiás</h3>
+            <ul><li>Goiás - 156 feminicídios</li></ul>
+          </div>
+          <div id="box_ma" data-info="ma" class="estado">
+            <h3>Maranhão</h3>
+            <ul><li>Maranhão - 90 feminicídios</li></ul>
+          </div>
+          <div id="box_mt" data-info="mt" class="estado">
+            <h3>Mato Grosso</h3>
+            <ul><li>Mato Grosso - 220 feminicídios</li></ul>
+          </div>
+          <div id="box_ms" data-info="ms" class="estado">
+            <h3>Mato Grosso do Sul</h3>
+            <ul><li>Mato Grosso do Sul - 181 feminicídios</li></ul>
+          </div>
+          <div id="box_pa" data-info="pa" class="estado">
+            <h3>Pará</h3>
+            <ul><li>Pará - 138 feminicídios</li></ul>
+          </div>
+          <div id="box_pb" data-info="pb" class="estado">
+            <h3>Paraíba</h3>
+            <ul><li>Paraíba - 90 feminicídios</li></ul>
+          </div>
+          <div id="box_pr" data-info="pr" class="estado">
+            <h3>Paraná</h3>
+            <ul><li>Paraná - 346 feminicídios</li></ul>
+          </div>
+          <div id="box_pe" data-info="pe" class="estado">
+            <h3>Pernambuco</h3>
+            <ul><li>Pernambuco - 146 feminicídios</li></ul>
+          </div>
+          <div id="box_pi" data-info="pi" class="estado">
+            <h3>Piauí</h3>
+            <ul><li>Piauí - 98 feminicídios</li></ul>
+          </div>
+          <div id="box_rn" data-info="rn" class="estado">
+            <h3>Rio Grande do Norte</h3>
+            <ul><li>Rio Grande do Norte - 45 feminicídios</li></ul>
+          </div>
+          <div id="box_rs" data-info="rs" class="estado">
+            <h3>Rio Grande do Sul</h3>
+            <ul><li>Rio Grande do Sul - 189 feminicídios</li></ul>
+          </div>
+          <div id="box_ro" data-info="ro" class="estado">
+            <h3>Rondônia</h3>
+            <ul><li>Rondônia - 98 feminicídios</li></ul>
+          </div>
+          <div id="box_rr" data-info="rr" class="estado">
+            <h3>Roraima</h3>
+            <ul><li>Roraima - 25 feminicídios</li></ul>
+          </div>
+          <div id="box_sc" data-info="sc" class="estado">
+            <h3>Santa Catarina</h3>
+            <ul><li>Santa Catarina - 249 feminicídios</li></ul>
+          </div>
+          <div id="box_se" data-info="se" class="estado">
+            <h3>Sergipe</h3>
+            <ul><li>Sergipe - 32 feminicídios</li></ul>
+          </div>
+          <div id="box_to" data-info="to" class="estado">
+            <h3>Tocantins</h3>
+            <ul><li>Tocantins - 51 feminicídios</li></ul>
+          </div>
         </div>
+      </div>
     </div>
-</section>
 
-    </main>
-    <!-- Footer -->
-    <footer class="bg-[#4a248f] text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Vozes Femininas. Todos os direitos reservados.</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="text-white hover:text-gray-300">Facebook</a>
-                <a href="#" class="text-white hover:text-gray-300">Instagram</a>
-                <a href="#" class="text-white hover:text-gray-300">X (Twitter)</a>
-            </div>
+    <!-- Seção de destaques (substitui utilitários do Tailwind por classes próprias) -->
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">Informação, apoio e direitos</h2>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="icon-circle" aria-hidden="true">📚</div>
+            <h3>Entenda as formas de violência</h3>
+            <p>Como identificar sinais e romper o ciclo.</p>
+            <a class="link" href="o_que_e.html">Aprender mais →</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-circle" aria-hidden="true">🛟</div>
+            <h3>Como buscar ajuda?</h3>
+            <p>Canais de denúncia, redes de apoio e abrigos seguros.</p>
+            <a class="link" href="ajuda.html">Encontre ajuda →</a>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-circle" aria-hidden="true">⚖️</div>
+            <h3>Conheça as leis</h3>
+            <p>Direitos da mulher e a Lei Maria da Penha. Conhecimento é poder.</p>
+            <a class="link" href="leis.html">Veja as leis →</a>
+          </article>
         </div>
-    </footer>
-    <!-- Scripts -->
-    <script>
-        $(document).ready(function(){
-            // Função para ativar um estado
-            function activateState(stateCode) {
-                // Reseta todos os estados
-                $('#map .state').removeClass('active');
-                $('.parca .estado').removeClass('active');
+      </div>
+    </section>
 
-                if (stateCode) {
-                    $('#state_' + stateCode).addClass('active');
-                    
-                    $('#box_' + stateCode).addClass('active');
-                    
-                    $('#seletory').val(stateCode);
-                }
-            }
+  </main>
 
-            $('#map .state').click(function(e){
-                e.preventDefault(); 
-                var estado = $(this).attr('data-state');
-                activateState(estado);
-            });
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p>&copy; 2024 Vozes Femininas. Todos os direitos reservados.</p>
+      <div class="social">
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="X (Twitter)">X (Twitter)</a>
+      </div>
+    </div>
+  </footer>
 
-            
-            $('#seletory').change(function () {
-                var estado = $(this).val();
-                activateState(estado);
-            });
-        
-            activateState('mg');
-        });
-
-            $(document).ready(function(){
-        
-        function activateState(stateCode) {           
-        }
-        $('#map .state').click(function(e){
-            e.preventDefault();
-            var estado = $(this).attr('data-state');
-            activateState(estado);
-        });
-        $('#seletory').change(function () {
-            var estado = $(this).val();
-            activateState(estado);
-        });
-        activateState('mg');
-
-        $('#hamburger-button').click(function() {
-
-            $('#mobile-menu').toggleClass('hidden');
-        });
-   
-    });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
